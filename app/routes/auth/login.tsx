@@ -4,13 +4,12 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Checkbox,
   Stack,
   Link,
   Button,
   Heading,
-  Text,
   useColorModeValue,
+  Image,
 } from '@chakra-ui/react';
 import { useLoaderData } from '@remix-run/react';
 import api from '~/services/api.server';
@@ -20,8 +19,7 @@ export async function loader() {
   return res.data;
 }
 
-
-const Index = () => {
+const Login = () => {
   const cities = useLoaderData();
 
   return (
@@ -29,45 +27,63 @@ const Index = () => {
       minH={'100vh'}
       align={'center'}
       justify={'center'}
-      bg={useColorModeValue('gray.50', 'gray.800')}>
+      bg={useColorModeValue('gray.50', 'gray.800')}
+    >
 
-        <code>{ JSON.stringify(cities, null, 2) }</code>
-      <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+      <Stack
+        spacing={8}
+        mx={'auto'}
+        maxW={'lg'}
+        py={12}
+        px={6}
+      >
         <Stack align={'center'}>
-          <Heading fontSize={'4xl'}>Sign in to your account</Heading>
-          <Text fontSize={'lg'} color={'gray.600'}>
-            to enjoy all of our cool <Link color={'blue.400'}>features</Link> ✌️
-          </Text>
+          <Image
+            // boxSize="70%"
+            boxSize="70%"
+            objectFit="contain"
+            src="/images/logo.png"
+            alt="Dan Abramov"
+          />
         </Stack>
         <Box
           rounded={'lg'}
           bg={useColorModeValue('white', 'gray.700')}
           boxShadow={'lg'}
-          p={8}>
+          p={8}
+        >
           <Stack spacing={4}>
+            <Heading
+              fontSize={'3xl'}
+              textAlign={'center'}
+              marginBottom={'20px'}
+            >
+              Login
+            </Heading>
+
             <FormControl id="email">
-              <FormLabel>Email address</FormLabel>
-              <Input type="email" />
+              <FormLabel>Endereço de e-mail</FormLabel>
+              <Input
+                autoFocus
+                type="email"
+              />
             </FormControl>
+
             <FormControl id="password">
-              <FormLabel>Password</FormLabel>
+              <FormLabel>Senha</FormLabel>
               <Input type="password" />
             </FormControl>
-            <Stack spacing={10}>
-              <Stack
-                direction={{ base: 'column', sm: 'row' }}
-                align={'start'}
-                justify={'space-between'}>
-                <Checkbox>Remember me</Checkbox>
-                <Link color={'blue.400'}>Forgot password?</Link>
-              </Stack>
+
+            <Stack spacing={5}>
+              <Link color={'blue.400'}>Esqueci minha senha</Link>
               <Button
                 bg={'blue.400'}
                 color={'white'}
                 _hover={{
                   bg: 'blue.500',
-                }}>
-                Sign in
+                }}
+              >
+                Logar
               </Button>
             </Stack>
           </Stack>
@@ -75,6 +91,6 @@ const Index = () => {
       </Stack>
     </Flex>
   );
-}
+};
 
-export default Index;
+export default Login;
